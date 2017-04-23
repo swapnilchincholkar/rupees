@@ -8,44 +8,44 @@ module NumberToRupees
         include InstanceMethods
       end
     end
- 
+
     module ClassMethods
     end
- 
+
     module InstanceMethods
-    def rupees
-     result = self >= 0 ? "" : "(-) "
-	  num = self.abs
-     
-     # I would prefer One Rupee, insead of One Rupees
-     return "One Rupee." if num==1
-	  
-     if num > 99
-      num.to_s.rjust(11,'0').insert(-4,'0').scan(/../).each_with_index{|x,i| result += self.def_calc(x,i) }
- 	  else	 
-       result = spell_two_digits(num)
-     end
-	  result.sub(/,\s$/,'')+ " Rupees."
-    end
+      def rupees
+        result = self >= 0 ? "" : "(-) "
+        num = self.abs
 
-    protected
-    def def_calc(x,i)
-     str=self.proc_unit(x)
-	  return '' if str.length==0
-     return "#{str}#{SUFIXES[i]}"
-    end
+        # I would prefer One Rupee, insead of One Rupees
+        return "Rupees One only." if num==1
 
-    def proc_unit(x)
-     return "" unless x.to_i > 0
-     return spell_two_digits(x.to_i)
+        if num > 99
+          num.to_s.rjust(11,'0').insert(-4,'0').scan(/../).each_with_index{|x,i| result += self.def_calc(x,i) }
+        else	 
+          result = spell_two_digits(num)
+        end
+        "Rupees " + result.sub(/,\s$/,'') + " only."
+      end
+
+      protected
+      def def_calc(x,i)
+        str=self.proc_unit(x)
+        return '' if str.length==0
+        return "#{str}#{SUFIXES[i]}"
+      end
+
+      def proc_unit(x)
+        return "" unless x.to_i > 0
+        return spell_two_digits(x.to_i)
+      end
+
+      def spell_two_digits(x)
+        return WORDS[x] if WORDS[x]
+        r,f = x.divmod(10)
+        return "#{WORDS[r*10]}#{WORDS[f]}"
+      end
     end
-	 
-	 def spell_two_digits(x)
-     return WORDS[x] if WORDS[x]
-     r,f = x.divmod(10)
-     return "#{WORDS[r*10]}#{WORDS[f]}"
-	 end
-   end
- end 
+  end 
 end 
 Fixnum.send :include, NumberToRupees::Fixnum
