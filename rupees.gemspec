@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.description = %q{Convert number to Indian rupee(Rs)}
   s.email = %q{shivsingh@railsfactory.org}
   s.extra_rdoc_files = ["README.rdoc", "lib/rupees.rb"]
-  s.files = ["README.rdoc", "Rakefile", "lib/rupees.rb", "Manifest", "rupees.gemspec"]
+  s.files = ["README.rdoc", "Rakefile", "lib/rupees.rb", "rupees.gemspec"]
   s.homepage = %q{http://github.com/shivisngh/rupees}
   s.rdoc_options = ["--line-numbers", "--inline-source", "--title", "Rupees", "--main", "README.rdoc"]
   s.require_paths = ["lib"]

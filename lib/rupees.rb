@@ -43,7 +43,7 @@ module NumberToRupees
       def spell_two_digits(x)
         return WORDS[x] if WORDS[x]
         r,f = x.divmod(10)
-        return "#{WORDS[r*10]}#{WORDS[f]}"
+        return "#{WORDS[r*10]} #{WORDS[f]}"
       end
     end
   end 
